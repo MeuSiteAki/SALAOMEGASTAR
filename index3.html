@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Star</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<style>
+    body {
+        font-family: Verdana;
+        margin: 0;
+        padding: 0;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .item {
+        text-align: center;
+        background-color: rgb(190, 190, 190);
+        border-radius: 8px;
+        padding: 7px;
+    }
+
+    header {
+        background: rgb(0, 0, 0);
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+        font-size: 20px;
+        text-shadow: 2px 2px 5px rgb(255, 255, 255);
+        border-radius: 10px;
+    }
+
+    nav ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+    }
+
+    nav ul li {
+        display: inline;
+        margin: 0 15px;
+        background-color: rgb(255, 255, 255);
+        padding: 5px;
+        border-radius: 10px;
+        font-size: 20px;
+        box-shadow: 10px 10px 20px rgb(0, 0, 0), -10px -10px 20px rgb(0, 0, 0)
+    }
+
+    nav ul li a {
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+    }
+
+    section {
+        padding: 20px;
+        margin: 10px;
+        background: #fff;
+        border-radius: 5px;
+        font-weight: 600;
+    }
+
+    footer {
+        text-align: center;
+        padding: 10px 0;
+        background: #000000;
+        color: #fff;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+
+    #agendar {
+        color: white;
+        background-color: rgb(45, 45, 238);
+        font-size: 19px;
+        padding: 5px;
+        border-radius: 10px;
+        font-weight: 600;
+    }
+
+    #enviar {
+        color: white;
+        background-color: rgb(16, 190, 10);
+        font-size: 18px;
+        padding: 5px;
+        border-radius: 10px;
+        font-weight: 600;
+        opacity: 0;
+        transition: opacity 2s;
+    }
+
+    .serviços {
+        background: linear-gradient(90deg, rgb(0, 0, 0), black, rgb(0, 0, 0));
+        color: rgb(255, 255, 255);
+        font-size: 30px;
+        border-radius: 10px;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    #sobre {
+        text-align: center;
+    }
+
+    #contato {
+        text-align: center;
+    }
+
+    #horario {
+        font-size: 22px;
+        border-radius: 7px;
+    }
+
+    #horario option {
+        font-weight: 600;
+    }
+
+    input[type="checkbox"] {
+        width: 18px;
+        height: 20px;
+    }
+
+    .logo {
+        height: 200px;
+        width: 300px;
+        border-radius: 10px;
+    }
+
+    label {
+        font-size: 25px;
+    }
+
+    .pagamento {
+        text-align: center;
+    }
+
+    #topo {
+        background-color: rgb(255, 255, 255);
+
+    }
+
+    .foto {
+        width: 200px;
+        height: 200px;
+        background-image: url('foto 1.jpg');
+        background-size: cover;
+        position: relative;
+        animation: mover 4s forwards;
+    }
+
+    @keyframes mover {
+        from {
+            transform: translateX(50%);
+        }
+
+        to {
+            transform: translateX(0);
+        }
+    }
+
+    input[type="checkbox"] {
+        width: 30px;
+        height: 50px;
+    }
+
+    .btn-carrinho {
+        background-color: #17801b;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 15px;
+    }
+
+    .btn-add {
+        font-family: Verdana;
+        background-color: rgb(87, 83, 83);
+        color: white;
+        font-weight: 600;
+        padding: 1px;
+    }
+
+    .btn-env {
+        font-family: Verdana;
+        background-color: rgb(103, 255, 56);
+        font-weight: 600;
+        border-radius: 10px;
+    }
+
+    .btn-lim {
+        font-family: Verdana;
+        background-color: rgb(119, 119, 119);
+        border-radius: 30px;
+        color: white;
+        padding: 3px;
+    }
+
+    .btn-des {
+        border-radius: 10px;
+        color: rgb(0, 0, 0);
+        background-color: rgb(255, 255, 255);
+        padding: 3px;
+        font-weight: 600;
+    }
+</style>
+
+<body>
+    <section id="topo">
+        <header>
+            <div class="foto"></div>
+        </header>
+    </section>
+
+    <section class="inicio">
+
+        <style>
+            .nome {
+                cursor: pointer;
+                color: rgb(0, 0, 0);
+                text-decoration: underline;
+                text-align: center;
+                font-family: Verdana;
+                font-weight: 600;
+                font-size: 22px;
+            }
+
+            .popup {
+                display: none;
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                justify-content: center;
+                align-items: center;
+            }
+
+            .popup img {
+                max-width: 80%;
+                max-height: 80%;
+            }
+
+            .inicio {
+                background-color: rgb(255, 255, 255);
+            }
+
+            #listaCarrinho {
+                font-size: 20px;
+            }
+
+            .S1 {
+                background-color: white;
+                color: black;
+                padding: 3px;
+                border-radius: 5px;
+            }
+        </style>
+        <style>
+            nav {
+                overflow: hidden;
+            }
+
+            ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            li {
+                opacity: 0;
+                transform: translateY(20px);
+                animation: slideIn 4s forwards;
+            }
+
+            li:nth-child(1) {
+                animation-delay: 0.2s;
+            }
+
+            li:nth-child(2) {
+                animation-delay: 0.4s;
+            }
+
+            li:nth-child(3) {
+                animation-delay: 0.6s;
+            }
+
+            @keyframes slideIn {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .estrela {
+                position: absolute;
+                width: 2px;
+                height: 2px;
+                background: white;
+                opacity: 0;
+                animation: cair 5s linear forwards;
+            }
+
+            @keyframes cair {
+                0% {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translateY(100vh);
+                    opacity: 0;
+                }
+            }
+
+            .descricao {
+                font-family: Verdana;
+                padding: 5px;
+                color: rgb(4, 0, 219);
+            }
+        </style>
+        <script>
+            function criarEstrela() {
+                const estrela = document.createElement('div');
+                estrela.className = 'estrela';
+                estrela.style.left = Math.random() * window.innerWidth + 'px';
+                estrela.style.top = Math.random() * -100 + 'px';
+                document.body.appendChild(estrela);
+                setTimeout(() => {
+                    estrela.remove();
+                }, 5000);
+            }
+
+            setInterval(criarEstrela, 200);
+        </script>
+        </head>
+
+        <nav>
+            <ul>
+                <li><a href="#servicos">Produtos</a></li><br><br><br>
+                <li><a href="#sobre">Contatos</a></li><br><br><br>
+                <li><a style="background-color: black; color: white; padding: 10px; border-radius: 7px;"
+                        href="index2.html">Voltar</a></li><br><br>
+            </ul>
+        </nav><br>
+    </section>
+    <style>
+        .container {
+            position: relative;
+            width: 270px;
+            height: 270px;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+
+        }
+
+        .active {
+            opacity: 1;
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .F1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            margin: 0;
+            height: 50vh;
+            background-image: url('fundo.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+    <section class="F1">
+        <div class="container">
+            <div class="slide active">
+                <img src="fundo1.jpg" alt="Foto 1" style="width:100%; height:100%;">
+                <div class="caption"> 1</div>
+            </div>
+            <div class="slide">
+                <img src="fundo2.jpeg" alt="Foto 2" style="width:100%; height:100%;">
+                <div class="caption"> 2</div>
+            </div>
+            <div class="slide">
+                <img src="fundo3.png" alt="Foto 3" style="width:100%; height:100%;">
+                <div class="caption"> 3</div>
+            </div>
+            <div class="slide">
+                <img src="fundo4.jpg" alt="Foto 3" style="width:100%; height:100%;">
+                <div class="caption"> 4</div>
+            </div>
+        </div>
+
+        <script>
+            let index = 0;
+            const slides = document.querySelectorAll('.slide');
+
+            function showSlide() {
+                slides[index].classList.remove('active');
+                index = (index + 1) % slides.length;
+                slides[index].classList.add('active');
+            }
+
+            setInterval(showSlide, 3000);
+        </script>
+    </section>
+
+    <!-- <div class="nome" onclick="mostrarImagem('foto4 tipos.jpg')">EXEMPLOS DE SOBRANCELHAS</div><br>
+        <div class="nome" onclick="mostrarImagem('foto4 tipo2.webp')">FORMATO DO ROSTO</div>
+
+        <div class="popup" id="popup" onclick="fecharImagem()">
+            <img id="imagemPopup" src="" alt="Imagem">
+        </div>
+
+        <script>
+            function mostrarImagem(imagem) {
+                document.getElementById('imagemPopup').src = imagem;
+                document.getElementById('popup').style.display = 'flex';
+            }
+
+            function fecharImagem() {
+                document.getElementById('popup').style.display = 'none';
+            }
+        </script> -->
+    </section>
+    <style>
+        .imagem {
+            width: 100px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup img {
+            max-width: 60%;
+            max-height: 90%;
+        }
+    </style>
+    <script>
+        function abrirPopup(src) {
+            document.getElementById('imagemPopup').src = src;
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        function fecharPopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+    <script>
+        function mostrarDescricao(botao) {
+            var descricao = botao.previousElementSibling;
+            if (descricao.style.display === "none") {
+                descricao.style.display = "block";
+                botao.textContent = "Fechar";
+            } else {
+                descricao.style.display = "none";
+                botao.textContent = "Descrição";
+            }
+        }
+    </script>
+    <!-- produtos -->
+    <div id="quantidade1">0</div>
+    <section id="servicos">
+        <marquee class="serviços" id="T" scrollamount="5" direction="right"><i class="sec">PRODUTOS</i></marquee>
+        <div class="produtos">
+            <div id="container" class="produto">
+                <img style="width: 68%;" src="prod 1.png" class="imagem" onclick="abrirPopup(this.src)">
+                <div class="popup" id="popup" onclick="fecharPopup()">
+                    <img id="imagemPopup" src="">
+                </div>
+                <p>PRODUTO R$15,00</p>
+                <p class="descricao" style="display: none;">PRODUTO CHANEL Nº5</p>
+                <button class="btn-des" onclick="mostrarDescricao(this)">Descrição</button><br><br>
+                <button id="PRODUTO" class="btn-env"
+                    onclick="adicionarItem('PRODUTO ' + document.getElementById('PRODUTO').value, 15)">
+                    Carrinho</button>
+            </div>
+            <div id="container" class="produto">
+                <img style="width: 68%;" src="prod 1.png" class="imagem" onclick="abrirPopup(this.src)">
+                <div class="popup" id="popup" onclick="fecharPopup()">
+                    <img id="imagemPopup" src="">
+                </div>
+                <p>PRODUTO R$20,00</p>
+                <p class="descricao" style="display: none;">PRODUTO CHANEL Nº5</p>
+                <button class="btn-des" onclick="mostrarDescricao(this)">Descrição</button><br><br>
+                <button id="PRODUTO" class="btn-env"
+                    onclick="adicionarItem('PRODUTO ' + document.getElementById('PRODUTO').value, 20)">
+                    Carrinho</button>
+            </div>
+            <div id="container" class="produto">
+                <img style="width: 68%;" src="prod 1.png" class="imagem" onclick="abrirPopup(this.src)">
+                <div class="popup" id="popup" onclick="fecharPopup()">
+                    <img id="imagemPopup" src="">
+                </div>
+                <p>PRODUTO R$19,90</p>
+                <p class="descricao" style="display: none;">PRODUTO CHANEL Nº5</p>
+                <button class="btn-des" onclick="mostrarDescricao(this)">Descrição</button><br><br>
+                <button id="PRODUTO" class="btn-env"
+                    onclick="adicionarItem('PRODUTO ' + document.getElementById('PRODUTO').value, 19.90)">
+                    Carrinho</button>
+            </div>
+        </div>
+        <div class="produtos">
+            <div id="container" class="produto">
+                <img style="width: 68%;" src="prod 2.jpg" class="imagem" onclick="abrirPopup(this.src)">
+                <div class="popup" id="popup" onclick="fecharPopup()">
+                    <img id="imagemPopup" src="">
+                </div>
+                <p>PRODUTO2 R$15,00</p>
+                <p class="descricao" style="display: none;">PRODUTO2 feminino rodado estampado.</p>
+                <button class="btn-des" onclick="mostrarDescricao(this)">Descrição</button><br><br>
+                <button id="PRODUTO2" class="btn-env"
+                    onclick="adicionarItem('PRODUTO2 ' + document.getElementById('PRODUTO2').value, 15)">
+                    Carrinho</button>
+            </div>
+            <div id="container" class="produto">
+                <img style="width: 68%;" src="prod 2.jpg" class="imagem" onclick="abrirPopup(this.src)">
+                <div class="popup" id="popup" onclick="fecharPopup()">
+                    <img id="imagemPopup" src="">
+                </div>
+                <p>PRODUTO2 R$20,00</p>
+                <p class="descricao" style="display: none;">PRODUTO2 feminino rodado estampado.</p>
+                <button class="btn-des" onclick="mostrarDescricao(this)">Descrição</button><br><br>
+                <button id="PRODUTO2" class="btn-env"
+                    onclick="adicionarItem('PRODUTO2 ' + document.getElementById('PRODUTO2').value, 20)">
+                    Carrinho</button>
+            </div>
+            <div id="container" class="produto">
+                <img style="width: 68%;" src="prod 2.jpg" class="imagem" onclick="abrirPopup(this.src)">
+                <div class="popup" id="popup" onclick="fecharPopup()">
+                    <img id="imagemPopup" src="">
+                </div>
+                <p>PRODUTO2 R$19,90</p>
+                <p class="descricao" style="display: none;">PRODUTO2 feminino rodado estampado.</p>
+                <button class="btn-des" onclick="mostrarDescricao(this)">Descrição</button><br><br>
+                <button id="PRODUTO2" class="btn-env"
+                    onclick="adicionarItem('PRODUTO2 ' + document.getElementById('PRODUTO2').value, 19.90)">
+                    Carrinho</button>
+            </div>
+        </div>
+        <div class="produtos">
+            <div id="container" class="produto">
+                <img id="image" src="foto2.jpg" alt="Imagem para dar zoom">
+                <div id="popup" class="popup" onclick="this.style.display='none'">
+                    <img style="width: 100%;" src="foto2.jpg" alt="Imagem">
+                </div>
+                <p>PRODUTO2 R$15,00</p>
+                <p class="descricao" style="display: none;">Pão, 1 Blend de 130g, Queijo, Presunto, Bacon, Ovo,
+                    Salsicha, Salada e Batata.</p>
+                <button class="btn-des" onclick="mostrarDescricao(this)">Descrição</button><br><br>
+                <button id="PRODUTO2" class="btn-env"
+                    onclick="adicionarItem('PRODUTO2 ' + document.getElementById('PRODUTO2').value, 15)">
+                    Carrinho</button>
+            </div>
+            <div id="container" class="produto">
+                <img id="image"
+                    src="PRODUTO2_feminino_rodado_estampado_moda_roupas_femininas_2315_variacao_7383_1_3bb5affa5fb59dba7a4c1dd26c3b64e6-ba7a4c1dd26c3b64e616492706275520-640-0.webp"
+                    alt="Imagem para dar zoom">
+                <div id="popup" class="popup" onclick="this.style.display='none'">
+                    <img style="width: 100%;"
+                        src="PRODUTO2_feminino_rodado_estampado_moda_roupas_femininas_2315_variacao_7383_1_3bb5affa5fb59dba7a4c1dd26c3b64e6-ba7a4c1dd26c3b64e616492706275520-640-0.webp"
+                        alt="Imagem">
+                </div>
+                <p>PRODUTO2 R$15,00</p>
+                <p class="descricao" style="display: none;">Pão de gergelim, 1 blend de 130g, Queijo mussarela, Bacon e
+                    Salada.</p>
+                <button class="btn-des" onclick="mostrarDescricao(this)">Descrição</button><br><br>
+                <button id="PRODUTO2" class="btn-env"
+                    onclick="adicionarItem('PRODUTO2 ' + document.getElementById('PRODUTO2').value, 16)">
+                    Carrinho</button>
+            </div>
+            <div id="container" class="produto">
+                <img id="image"
+                    src="PRODUTO2_feminino_rodado_estampado_moda_roupas_femininas_2315_variacao_7385_1_3df7afc06d5c2a459c935c64ed8689eb-459c935c64ed8689eb16492706450759-640-0.webp"
+                    alt="Imagem para dar zoom">
+                <p>PRODUTO2 R$15,00</p>
+                <p class="descricao" style="display: none;">Pão de gergelim, 1 blend de 130g, Queijo cheddar, Bacon e
+                    Salada.</p>
+                <button class="btn-des" onclick="mostrarDescricao(this)">Descrição</button><br><br>
+                <button id="PRODUTO2" class="btn-env"
+                    onclick="adicionarItem('PRODUTO2 ' + document.getElementById('PRODUTO2').value, 16)">
+                    Carrinho</button>
+            </div>
+        </div>
+
+        <!-- contador -->
+        <style>
+            #quantidade1 {
+                width: 3%;
+                position: fixed;
+                width: 25px;
+                height: 28px;
+                bottom: 170px;
+                right: 10px;
+                text-align: center;
+                font-size: 25px;
+                z-index: 1000;
+                background-color: rgb(255, 255, 255);
+                border-radius: 30px;
+                color: rgb(0, 0, 0);
+            }
+        </style>
+
+        <!--carrinho de compras-->
+        <marquee style="text-align: center; font-family: Verdana; font-weight: 200;" class="serviços" id="T"
+            scrollamount="0" direction="right"><i class="sec">CARRINHO</i></marquee>
+        <br>
+        <div class="carrinho" id="carrinho">
+            <h2 id="carrinho2"><img style="width: 4%;" src="carrinho-de-compras.png" alt="">Carrinho</h2>
+            <ul style="font-weight: 600;" id="listaCarrinho"></ul>
+            <p style="font-weight: 600;color: red; font-size: larger;">Total: R$<span
+                    style="font-family: Verdana; font-weight: 800;color: red; font-size: large;" id="total">0.00</span>
+            <h4>O VALOR DO FRETE DE R$5,00 SERÁ INCLUSO NO TOTAL.</h4>
+            <h5>ATENÇÃO: FRETE SÓ PARA A CIDADE DE ITINGA-MA.</h5>
+            <button class="btn-lim" onclick="limparCarrinho()">Limpar Carrinho</button>
+            </p>
+            <!--<p style="color: red;">Prezado cliente, será cobrado a taxa de entrega no valor de R$2,00.</p>-->
+            <p><u>TEL: 999999999</u> / <u>CPF: 00000000000</u></p>
+            <button style="padding: 5px; border-radius:10px; background-color: blue; color: white;font-weight: 600;"
+                onclick="copiarTexto('99999999999')">Copia e cola PIX: TEL</button>
+            <button style="padding: 5px; border-radius:10px; background-color: blue; color: white;font-weight: 600;"
+                onclick="copiarTexto('00000000000')">Copia e cola PIX: CPF</button>
+            <script>
+                function copiarTexto(texto) {
+                    navigator.clipboard.writeText(texto).then(() => {
+                        Swal.fire('PIX copiado: ' + texto);
+                    }).catch(err => {
+                        console.error('Erro ao copiar: ', err);
+                    });
+                }
+            </script>
+            <p style="color: #150f6b;">Observação:</p>
+            <textarea style="font-family: Verdana; font-weight: 600; color: red; border-radius: 5px;" name="obser"
+                id="obser" cols="30" rows="3"></textarea><br><br>
+
+            <!--endereço-->
+            <style>
+                label {
+                    font-family: Verdana;
+                    font-weight: 600;
+                }
+            </style>
+            <label for="endereco">ENDEREÇO PARA ENTREGA:</label><br><br>
+            <input size="30" style="border-radius: 10px; text-align: center; font-weight: 600;" type="text"
+                id="endereco" name="endereco" placeholder="Rua ou Av. / N°" required><br><br>
+            <label for="endereco">DIGITE SEU NOME:</label><br><br>
+            <input size="30" style="border-radius: 10px; text-align: center; font-weight: 600;" type="text" id="nome"
+                name="nome" placeholder="Nome" required><br><br>
+            <label for="formaPagamento">FORMA DE PAGAMENTO:</label><br><br>
+            <select style="border-radius: 10px; text-align: center;" id="formaPagamento" name="formaPagamento" required>
+                <option value="PIX">PIX</option>
+                <option value="Credito">Cartão de Crédito</option>
+                <option value="Debito">Cartão de Débito</option>
+                <option value="Dinheiro">Dinheiro</option>
+            </select><br><br>
+            <button class="btn-carrinho" onclick="enviarWhatsapp()">Finalizar no Whatsapp</button><br>
+
+            <!-- <style>
+            .piscar {
+              animation: piscar 3s infinite; font-family: Verdana; font-weight: 600; }
+             @keyframes piscar {
+              0% {color: blue;}
+              25% {color: black;}
+              50% {color: blue; }
+              75% {color: black;}
+              100% {color: blue;} }
+          </style>-->
+
+        </div>
+        <!--carrinho-->
+        <script>
+            let carrinho = [];
+            let total = 0;
+            let quantidade1Total = 0;
+
+            function adicionarItem(item, preco) {
+                carrinho.push({ item, preco });
+                total += preco;
+                quantidade1Total++;
+                Swal.fire('Adicionado ao carrinho!');
+                document.getElementById('quantidade1').innerText = quantidade1Total;
+                document.getElementById('listaCarrinho').innerHTML = '';
+                carrinho.forEach((produto) => {
+                    const li = document.createElement('li');
+                    Swal.fire('Adicionado ao carrinho!');
+                    li.textContent = `${produto.item} - R$${produto.preco.toFixed(2)}`;
+                    document.getElementById('listaCarrinho').appendChild(li);
+                });
+                document.getElementById('total').textContent = (total + 5).toFixed(2);
+            }
+            function adicionarItem1() {
+                quantidade1Total++;
+                Swal.fire('Adicionado ao carrinho!');
+                document.getElementById('quantidade1').innerText = quantidade1Total;
+
+            }
+
+            function enviarWhatsapp() {
+                const endereco = document.getElementById('endereco').value;
+                const formaPagamento = document.getElementById('formaPagamento').value;
+                const obser = document.getElementById('obser').value;
+                const nome = document.getElementById('nome').value;
+                const mensagem = `\nInformações do Cliente: \nNome: ${nome}   \nEndereço: ${endereco}\nForma de Pagamento: - ${formaPagamento} 
+
+    *Observação: ${obser}.
+    
+    #MEU PEDIDO : ${carrinho.map((produto) => `${produto.item} - R$${produto.preco.toFixed(2)}`).join(', ')} = Total: R$${(total + 5).toFixed(2)}} 
+      --------------------------------- 
+      A Loja Agradece! `;
+                window.open(`https://api.whatsapp.com/send?phone=5599992247544&text=${encodeURIComponent(mensagem)}`, '_blank');
+            }
+            function limparCarrinho() {
+                carrinho = [];
+                total = 0;
+                quantidade1Total = 0;
+                document.getElementById('quantidade1').innerText = quantidade1Total;
+                document.getElementById('listaCarrinho').innerHTML = '';
+                document.getElementById('total').textContent = total.toFixed(2);
+            }
+        </script>
+
+        <footer>
+            <style>
+                footer {
+                    background-color: #333;
+                    color: #fff;
+                    text-align: center;
+                    padding: 10px 0;
+                }
+
+                .rodape ul {
+                    list-style: none;
+                    padding: 0;
+                }
+
+                .rodape li {
+                    display: inline;
+                    margin: 0 10px;
+                }
+
+                .rodape a {
+                    color: #fff;
+                    text-decoration: none;
+                }
+
+                .rodape a:hover {
+                    text-decoration: underline;
+                }
+
+                .wha {
+                    width: 2%;
+                    box-shadow: 10px, 10px, 20px black -10px -10px 20px black;
+                }
+
+                .inst {
+                    width: 2%;
+                }
+
+                .whatsapp-link {
+                    position: fixed;
+                    width: 40px;
+                    height: 40px;
+                    bottom: 40px;
+                    right: 15px;
+                    border-radius: 50px;
+                    text-align: center;
+                    font-size: 30px;
+                    z-index: 1000;
+                }
+
+                .car {
+                    width: 20%;
+                    margin-top: 3%;
+                }
+
+                .car2 {
+                    width: 3%;
+                    position: fixed;
+                    position: fixed;
+                    width: 40px;
+                    height: 40px;
+                    bottom: 130px;
+                    right: 15px;
+                    text-align: center;
+                    font-size: 30px;
+                    z-index: 1000;
+                    background-color: rgb(165, 164, 164);
+                    border-radius: 30%;
+                }
+
+                .car3 {
+                    width: 3%;
+                    position: fixed;
+                    position: fixed;
+                    width: 40px;
+                    height: 40px;
+                    bottom: 220px;
+                    right: 15px;
+                    text-align: center;
+                    font-size: 30px;
+                    z-index: 1000;
+                    background-color: rgb(165, 164, 164);
+                    border-radius: 30%;
+                }
+            </style>
+            <!--rodape-->
+
+            <marquee class="serviços" id="T" scrollamount="5" direction="right"><i class="sec">CONTATO</i></marquee>
+            <style>
+                footer {
+                    background-color: #000000;
+                    color: #fff;
+                    text-align: center;
+                    padding: 10px 0;
+                    border-radius: 10px;
+                }
+
+                .rodape ul {
+                    list-style: none;
+                    padding: 0;
+                    font-size: 12px;
+                }
+
+                .rodape li {
+                    display: inline;
+                    margin: 0 10px;
+                }
+
+                .rodape a {
+                    color: #fff;
+                    text-decoration: none;
+                }
+
+                .rodape a:hover {
+                    text-decoration: underline;
+                }
+
+                .wha {
+                    width: 2%;
+                    box-shadow: 10px, 10px, 20px black -10px -10px 20px black;
+                }
+
+                .inst {
+                    width: 2%;
+                }
+
+                .car {
+                    width: 20%;
+                    margin-top: 3%;
+                }
+
+                b {
+                    font-size: 12px;
+                }
+            </style>
+            <!--rodape-->
+            <div class="rodape">
+                <ul>
+                    <h4> <img class="wha" src="whatsapp.png">(99) 99224-7544</h4>
+                    <li>
+                        <img id="C1" class="inst" src="instagram.png" alt=""><a style="font-size: 100%;"
+                            href="https://www.instagram.com/anacamiladesignerdefestas?igsh=YWVhYXN4bTZjNmxj&utm_source=qr">
+                            <b>Acesse aqui nosso Instagram</b></a>
+                        <a class="whatsapp-link" href="https://wa.me/5599992247544" target="_blank"><img
+                                class="whatsapp-link" src="whatsapp.png" alt=""></a>
+                    </li>
+                    <a href="#carrinho2"><img class="car2" src="carrinho-de-compras.png"></a>
+                    <a href="#topo"><img class="car3" src="img topo.png"></a>
+                </ul>
+                <!-- <li><b>Email:</b> itingadomaranhao@gmail.com</li><br><br> -->
+                <li><b>Endereço: Av. Maron Ramos, Vila Samuel, Itinga do Maranhão.</b> <br>
+                    <br><b>Horario de atendimento: Segunda a Sábado das 8:00 as 18:00.
+                        <br><br>Formas de pagamentos:</b>
+                </li><br>
+
+                <img class="car" src="cartao.webp" alt=""><br><br>
+                <a href="https://wa.me/5599992247544" target="_blank">
+                    <li><i><u><b>Site criado por: Carlos de Freitas Rocha.</b> <br>Click no link e faça seu
+                                orçamento.</u></i></li>
+                </a>
+                <b>
+                    <p><a href="https://wa.me/5599992247544" target="_blank"><img src="logo2.png"
+                                style="width: 50px; border-radius: 10px;"></a></p>
+                </b>
+            </div>
+
+    </section>
+    </footer>
+    <style>
+        .produtos {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .produto {
+            padding: 5px;
+            margin: 5px;
+        }
+
+        #lista-carrinho {
+            list-style: none;
+            padding: 0;
+        }
+
+        #lista-carrinho li {
+            margin-bottom: 5px;
+        }
+
+        .carrinho {
+            padding: 20px;
+            background-color: #e2e2e2;
+            background-color: #ffffff;
+        }
+
+        .btn-carrinho {
+            background-color: #17801b;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 15px;
+        }
+    </style>
+</body>
+
+</html>
+<!-- horario no agendar = \nHorário marcado: ${horario} -->

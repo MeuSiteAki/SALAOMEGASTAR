@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Star</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        margin: 0;
+        height: 10vh;
+        font-family: Arial, sans-serif;
+        color: rgb(255, 255, 255);
+    }
+    .container {
+        text-align: center;
+        padding: 130px 20px;
+        background-color:rgb(37, 37, 37);
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    p {
+        font-size: 24px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .imagem {
+        width: 100px;
+        height: auto;
+        animation: zoom 3s forwards;
+        border-radius: 10px;
+    }
+
+    @keyframes zoom {
+        from {
+            transform: scale(-1);
+        }
+        to {
+            transform: scale(3);
+        }
+    }
+    footer {
+        text-align: center;
+        padding: 10px;
+        background-color: rgb(0 0 0 / 50%);
+        color: white;
+        text-align: center;
+    }
+
+    h3 {
+        font-family: Verdana;
+    }
+    h1, p {
+        position: absolute;
+        opacity: 0;
+        transform: translateY(-100%);
+        animation: fall 1s forwards;
+        text-align: center;
+    }
+    h1 {
+        font-size: 3em;
+        animation-delay: 0.5s;
+        text-align: center;
+    }
+    p {
+        font-size: 1.5em;
+        animation-delay: 1s;
+        text-align: center;
+    }
+    @keyframes fall {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    #nome {
+        display: none;
+        font-size: 2em;
+        text-align: center;
+        margin-top: 20%;
+        animation: fadeInOut 3s infinite;
+    }
+
+    @keyframes fadeInOut {
+        0% { opacity: 0; }
+        50% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+
+    .section-imagens {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 50px;
+    }
+
+    .section-imagens img {
+        margin: 10px;
+        width: 150px;
+        height: auto;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .popup img {
+        max-width: 90%;
+        max-height: 90%;
+    }
+
+    .popup:target {
+        display: flex;
+    }
+
+    .botao-piscando {
+        font-size: 30px;
+        font-weight: 600;
+        border-radius: 10px;
+        padding: 7px;
+        animation: piscar 3s infinite;
+    }
+
+    @keyframes piscar {
+        0%, 100% { background-color: black; color: white; }
+        50% { background-color: white; color: black; }
+    }
+</style>
+<script>
+    window.onload = function() {
+        document.querySelector('h1').style.animationPlayState = 'running';
+        document.querySelector('p').style.animationPlayState = 'running';
+    };
+</script>
+<body>
+    <div class="container">
+        <img src="foto 1.jpg" alt="Imagem" class="imagem" id="imagem">
+        <script>
+            window.onload = function () {
+                const imagem = document.getElementById('imagem');
+                imagem.classList.add('surgir');
+            };
+        </script><br><br><br><br><br>
+        <h1>Estamos aberto pra você.</h1><br><br><br><br><br><br><br><br><br>
+        <a href="index2.html"> <button style="cursor: pointer;" class="botao-piscando">ENTRE AQUI</button></a>
+        <p>E descubra as últimas tendências e estilos.</p>
+        <br><br><br>
+        <div class="section-imagens">
+            <a href="#popup1"><img src="IMG-20241220-WA0014.jpg" alt="Imagem 3"></a>
+            <a href="#popup2"><img src="IMG-20241220-WA0015.jpg" alt="Imagem 4"></a>
+        </div>
+        <div class="section-imagens">
+            <a href="#popup3"><img src="IMG-20241220-WA0010.jpg" alt="Imagem 1"></a>
+            <a href="#popup4"><img src="IMG-20241220-WA0013.jpg" alt="Imagem 2"></a>
+        </div>
+        <div class="section-imagens">
+            <a href="#popup5"><img src="2.jpg" alt="Imagem 1"></a>
+            <a href="#popup6"><img src="3.jpg" alt="Imagem 2"></a>
+        </div>
+    </div>
+
+    <div id="popup1" class="popup">
+        <a href="#!"><img src="IMG-20241220-WA0014.jpg" alt="Imagem 3"></a>
+    </div>
+    <div id="popup2" class="popup">
+        <a href="#!"><img src="IMG-20241220-WA0015.jpg" alt="Imagem 4"></a>
+    </div>
+    <div id="popup3" class="popup">
+        <a href="#!"><img src="IMG-20241220-WA0010.jpg" alt="Imagem 1"></a>
+    </div>
+    <div id="popup4" class="popup">
+        <a href="#!"><img src="IMG-20241220-WA0013.jpg" alt="Imagem 2"></a>
+    </div>
+    <div id="popup5" class="popup">
+        <a href="#!"><img src="2.jpg" alt="Imagem 2"></a>
+    </div>
+    <div id="popup6" class="popup">
+        <a href="#!"><img src="3.jpg" alt="Imagem 2"></a>
+    </div>
+    
+    <footer >
+        <style>
+            footer {background-color: #000000;color: #fff;text-align: center;padding: 10px 0;
+            border-radius: 10px;}
+            .rodape ul {list-style: none;padding: 0; font-size: 12px;}
+            .rodape li {display: inline;margin: 0 10px;}
+            .rodape a {color: #fff;text-decoration: none;}
+            .rodape a:hover { text-decoration: underline;}
+            .wha { width: 2%;box-shadow: 10px, 10px, 20px black -10px -10px 20px black;}
+            .inst {width: 2%;}
+            .car {width: 20%;margin-top: 3%; }
+            b{font-size: 12px;}
+            li{font-size: 12px;}
+        </style>
+        <!--rodape-->
+        <div class="rodape">
+            <ul>
+                <h4> <img class="wha" src="whatsapp.png">(99) 99218-3396</h4>
+                <li>
+                  <img id="C1" class="inst" src="instagram.png" alt=""><a style="font-size: 100%;"
+                        href="https://www.instagram.com/salao_mega_star_?igsh=MTBoajFhZnFvNnM5bg== ">
+                        <b>Acesse aqui nosso Instagram</b></a>
+              
+                </li>
+           
+            </ul>
+            <!-- <li><b>Email:</b> itingadomaranhao@gmail.com</li><br><br> -->
+            <li><b>Endereço:</b> rua Brasil, S\N, Jardim Planalto, Itinga do Maranhão. <br>
+                <br><strong>Horario de atendimento:</strong>  Segunda a Sábado das 8:00 as 11:00 <br> e das 13:00 as 19:00
+            <br><br>Formas de pagamentos:
+            </li><br>
+            <img class="car" src="cartao.webp" alt=""><br><br>
+            <a  href="https://wa.me/5599992183396" target="_blank"><li><i><u>Site criado por: Carlos de Freitas Rocha. <br>Click aqui e faça seu orçamento.</u></i></li></a>
+           
+        </div>
+    </footer> 
+</body>
+
+</html>
+

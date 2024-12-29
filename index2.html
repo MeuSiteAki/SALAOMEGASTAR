@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Star</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<style>
+    body {
+        font-family: Verdana;
+        margin: 0;
+        padding: 0;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .item {
+        text-align: center;
+        background-color: rgb(190, 190, 190);
+        border-radius: 50px;
+        padding: 15px;
+    }
+    nav ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+    }
+
+    nav ul li {
+        display: inline;
+        margin: 0 15px;
+        background-color: rgb(255, 255, 255);
+        padding: 5px;
+        border-radius: 10px;
+        font-size: 20px;
+        box-shadow: 10px 10px 20px rgb(0, 0, 0), -10px -10px 20px rgb(0, 0, 0)
+    }
+
+    nav ul li a {
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+    }
+
+    section {
+        padding: 20px;
+        margin: 10px;
+        background: #fff;
+        border-radius: 5px;
+        font-weight: 600;
+    }
+
+    footer {
+        text-align: center;
+        padding: 10px 0;
+        background: #000000;
+        color: #fff;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+
+    #agendar {
+        color: white;
+        background-color: rgb(45, 45, 238);
+        font-size: 19px;
+        padding: 5px;
+        border-radius: 10px;
+        font-weight: 600;
+    }
+
+    #enviar {
+        color: white;
+        background-color: rgb(16, 190, 10);
+        font-size: 18px;
+        padding: 5px;
+        border-radius: 10px;
+        font-weight: 600;
+        opacity: 0;
+        transition: opacity 2s;
+    }
+
+    .serviços {
+        background: linear-gradient(90deg, rgb(0, 0, 0), black, rgb(0, 0, 0));
+        color: rgb(255, 255, 255);
+        font-size: 30px;
+        border-radius: 10px;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    #sobre {
+        text-align: center;
+    }
+
+    #contato {
+        text-align: center;
+    }
+
+    #horario {
+        font-size: 22px;
+        border-radius: 7px;
+    }
+
+    #horario option {
+        font-weight: 600;
+    }
+
+    input[type="checkbox"] {
+        width: 18px;
+        height: 20px;
+    }
+
+    .logo {
+        height: 200px;
+        width: 300px;
+        border-radius: 10px;
+    }
+
+    label {
+        font-size: 25px;
+    }
+
+    .pagamento {
+        text-align: center;
+    }
+
+    #topo {
+        background-color: rgb(0, 0, 0);
+        box-shadow: 0px 40px 40px rgb(255, 255, 255);
+
+    }
+
+    .foto {
+        width: 200px;
+        height: 200px;
+        background-image: url('foto 1.jpg');
+        background-size: cover;
+        position: relative;
+        animation: mover 4s forwards;
+        border-radius: 50px;
+    }
+
+    @keyframes mover {
+        from {
+            transform: translateX(50%);
+        }
+
+        to {
+            transform: translateX(0);
+        }
+    }
+
+    input[type="checkbox"] {
+        width: 30px;
+        height: 50px;
+    }
+</style>
+
+<body>
+    <section style="border-radius: 100px;" id="topo">
+        <header>
+            <div class="foto"></div>
+        </header>
+    </section>
+
+    <section class="inicio">
+
+        <style>
+            .nome {
+                cursor: pointer;
+                color: rgb(0, 0, 0);
+                text-decoration: underline;
+                text-align: center;
+                font-family: Verdana;
+                font-weight: 600;
+                font-size: 22px;
+            }
+
+            .popup {
+                display: none;
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                justify-content: center;
+                align-items: center;
+            }
+
+            .popup img {
+                max-width: 80%;
+                max-height: 80%;
+            }
+
+            .inicio {
+                background-color: rgb(255, 255, 255);
+            }
+
+            #listaCarrinho {
+                font-size: 20px;
+            }
+
+            .S1 {
+                background-color: white;
+                color: black;
+                padding: 3px;
+                border-radius: 5px;
+            }
+        </style>
+        <style>
+            nav {
+                overflow: hidden;
+            }
+
+            ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            li {
+                opacity: 0;
+                transform: translateY(20px);
+                animation: slideIn 4s forwards;
+            }
+
+            li:nth-child(1) {
+                animation-delay: 0.2s;
+            }
+
+            li:nth-child(2) {
+                animation-delay: 0.4s;
+            }
+
+            li:nth-child(3) {
+                animation-delay: 0.6s;
+            }
+
+            @keyframes slideIn {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .estrela {
+                position: absolute;
+                width: 2px;
+                height: 2px;
+                background: white;
+                opacity: 0;
+                animation: cair 5s linear forwards;
+            }
+
+            @keyframes cair {
+                0% {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translateY(100vh);
+                    opacity: 0;
+                }
+            }
+        </style>
+        <script>
+            function criarEstrela() {
+                const estrela = document.createElement('div');
+                estrela.className = 'estrela';
+                estrela.style.left = Math.random() * window.innerWidth + 'px';
+                estrela.style.top = Math.random() * -100 + 'px';
+                document.body.appendChild(estrela);
+                setTimeout(() => {
+                    estrela.remove();
+                }, 5000);
+            }
+
+            setInterval(criarEstrela, 200);
+        </script>
+        </head>
+
+        <nav>
+            <ul>
+                <li><a href="#servicos">Serviços</a></li><br><br><br>
+                <li><a href="#sobre">Quem Somos</a></li><br><br><br>
+                <!-- <li><a style="background-color: black; color: white; padding: 10px; border-radius: 7px;" -->
+                        <!-- href="index3.html">Produtos AQUI!</a></li><br><br> -->
+            </ul>
+        </nav><br>
+    </section>
+    <style>
+        .container {
+            position: relative;
+            width: 270px;
+            height: 270px;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+
+        }
+
+        .active {
+            opacity: 1;
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .F1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            margin: 0;
+            height: 50vh;
+            background-image: url('fundo.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+    <section class="F1">
+        <div class="container">
+            <div class="slide active">
+                <img src="IMG-20241220-WA0010.jpg" alt="Foto 1" style="width:100%; height:100%;">
+                <div class="caption"> 1</div>
+            </div>
+            <div class="slide">
+                <img src="IMG-20241220-WA0011.jpg" alt="Foto 2" style="width:100%; height:100%;">
+                <div class="caption"> 2</div>
+            </div>
+            <div class="slide">
+                <img src="IMG-20241220-WA0012.jpg" alt="Foto 3" style="width:100%; height:100%;">
+                <div class="caption"> 3</div>
+            </div>
+            <div class="slide">
+                <img src="IMG-20241220-WA0013.jpg" alt="Foto 3" style="width:100%; height:100%;">
+                <div class="caption"> 4</div>
+            </div>
+            <div class="slide">
+                <img src="IMG-20241220-WA0014.jpg" alt="Foto 3" style="width:100%; height:100%;">
+                <div class="caption"> 5</div>
+            </div>
+            <div class="slide">
+                <img src="IMG-20241220-WA0015.jpg" alt="Foto 3" style="width:100%; height:100%;">
+                <div class="caption"> 6</div>
+            </div>
+            <div class="slide">
+                <img src="1.jpg" alt="Foto 3" style="width:100%; height:100%;">
+                <div class="caption"> 7</div>
+            </div>
+            <div class="slide">
+                <img src="4.jpg" alt="Foto 3" style="width:100%; height:100%;">
+                <div class="caption"> 8</div>
+            </div>
+            <div class="slide">
+                <img src="5.jpg" alt="Foto 3" style="width:100%; height:100%;">
+                <div class="caption"> 9</div>
+            </div>
+            <div class="slide">
+                <img src="6.jpg" alt="Foto 3" style="width:100%; height:100%;">
+                <div class="caption"> 10</div>
+            </div>
+            <div class="slide">
+                <img src="7.jpg" alt="Foto 3" style="width:100%; height:100%;">
+                <div class="caption"> 11</div>
+            </div>
+        </div>
+
+        <script>
+            let index = 0;
+            const slides = document.querySelectorAll('.slide');
+
+            function showSlide() {
+                slides[index].classList.remove('active');
+                index = (index + 1) % slides.length;
+                slides[index].classList.add('active');
+            }
+
+            setInterval(showSlide, 3000);
+        </script>
+    </section>
+
+    <!-- <div class="nome" onclick="mostrarImagem('foto4 tipos.jpg')">EXEMPLOS DE SOBRANCELHAS</div><br>
+        <div class="nome" onclick="mostrarImagem('foto4 tipo2.webp')">FORMATO DO ROSTO</div>
+
+        <div class="popup" id="popup" onclick="fecharImagem()">
+            <img id="imagemPopup" src="" alt="Imagem">
+        </div>
+
+        <script>
+            function mostrarImagem(imagem) {
+                document.getElementById('imagemPopup').src = imagem;
+                document.getElementById('popup').style.display = 'flex';
+            }
+
+            function fecharImagem() {
+                document.getElementById('popup').style.display = 'none';
+            }
+        </script> -->
+    </section>
+    <style>
+        .produtos {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .produto {
+            padding: 5px;
+            margin: 5px;
+        }
+       .btn-des {
+            font-family: Verdana;
+            padding: 7px;
+            border-radius: 7px;
+            background-color: black;
+            color: white;
+            box-shadow: 0px 10px 10px rgb(255, 255, 255);
+        }
+    </style>
+    <!-- produtos -->
+    <section id="servicos">
+        <marquee class="serviços" id="T" scrollamount="5" direction="right"><i class="sec">SERVIÇOS</i></marquee>
+        <h3 style="text-align: center; background-color: black; color: white; border-radius: 7px;">Para escolher um serviço basta marcar a caixinha:</h3>
+        <ul>
+            <div class="item" style="background-color: gray;">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="selagem 1.jpeg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Selagem a partir de: </a><br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Selagem a partir de: - R$100.00"> <br> R$100.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Selagem: Tratamento que proporciona brilho e maciez aos cabelos.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color:  rgb(206, 206, 206);">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="botox 1.jpg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Botox a partir: </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Botox a partir: - R$100.00"><br> R$100.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Botox: Tratamento que reduz o frizz e promove a hidratação.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color: gray;">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="alinhamento.webp" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Alinhamento a partir: </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Alinhamento a partir: - R$130.00"><br> R$130.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Alinhamento: Técnica que alisa os fios e proporciona um efeito liso.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color:  rgb(206, 206, 206);">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="progre 1.jpg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Progressiva a partir: </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Progressiva a partir: - R$150.00"><br> R$150.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Progressiva: Alisamento que proporciona fios lisos e sedosos.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color: gray;">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="defini 1.jpeg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Definitiva </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Definitiva - R$200.00"><br> R$200.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Definitiva: Alisamento permanente que transforma a estrutura do cabelo.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color:  rgb(206, 206, 206);">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="cronogra 1.jpg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Cronograma + Escova </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Cronograma + Escova - R$70.00"><br> R$70.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Cronograma: Tratamento que repara e nutre os fios.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color: gray;">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="colageno 1.jpeg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Colágeno + Escova </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Colágeno + Escova - R$100.00"><br> R$100.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Colágeno: Tratamento que fortalece e dá elasticidade aos fios.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color:  rgb(206, 206, 206);">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="blind 1.jpg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Blindagem + Escova </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Blindagem + Escova  - R$100.00"><br> R$100.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Blindagem: Protege os fios contra agressões externas.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color: gray;">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="PH 1.jpg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Controle de PH + Recontratação + Escova </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Controle de PH + Recontratação + Escova - R$110.00"><br> R$110.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Controle de PH: Equilibra o pH dos fios e reestrutura a fibra capilar.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color: rgb(206, 206, 206);">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="recons 1.jpg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Reconstrução + Escova </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Reconstrução + Escova - R$75.00"><br> R$75.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Reconstrução: Restaura a estrutura dos fios danificados.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color: gray;">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="caute 1.jpg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Cauterizaçao </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Calterizaçao  - R$95.00"><br> R$95.00 <br>
+                    <button class="btn-des" 
+                        onclick="mostrarDescricao('Calterização: Tratamento que repara e nutre os fios.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color:  rgb(206, 206, 206);">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="pintu 1.jpg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Pintura </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Pintura - R$40.00"><br> R$40.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Pintura: Coloração que transforma a aparência dos fios.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color: gray;">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="corte 1.jpg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Corte </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Corte - R$40.00"><br> R$40.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Corte: Serviço que modela e dá forma aos cabelos.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color: rgb(206, 206, 206);">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="corte 2.jpg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Corte Bordado </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Corte Bordado - R$40.00"><br> R$40.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Corte Bordado: Técnica que remove as pontas duplas.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color: gray;">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="escova 1.jpeg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Escova a partir: </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Escova a partir: - R$30.00"><br> R$30.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Escova: Finalização que proporciona brilho e movimento aos fios.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color:  rgb(206, 206, 206);">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="prancha 1.jpg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Prancha a partir: </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Prancha a partir: - R$30.00"><br> R$30.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Prancha: Alisamento temporário que proporciona fios lisos.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color: gray;">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="baby 1.jpeg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Baby Liss a partir: </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Baby Liss a partir: - R$50.00"><br> R$50.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Baby Liss: Técnica que cria ondas nos cabelos.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color: rgb(206, 206, 206);">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="luzes 1.jpeg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Luzes na Touca a partir: </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Luzes na Touca a partir: - R$300.00"><br> R$300.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Luzes: Técnica que ilumina os fios com mechas.')">Descrição</button>
+                </label>
+            </div><br>
+            <div class="item" style="background-color: gray;">
+                <label>
+                    <img style="clip-path: circle(50% at 50% 50%);" src="mexas 1.jpg" width="150px" height="150px">
+                    <br>
+                    <a class="S1">Mechas Loiras a partir: </a> <br>
+                    <input onchange="atualizarContador(this)" type="checkbox" class="produto"
+                        value="Mechas Loiras a partir: - R$400.00"><br> R$400.00 <br>
+                    <button class="btn-des"
+                        onclick="mostrarDescricao('Mechas: Técnica que cria mechas loiras nos cabelos.')">Descrição</button>
+                </label>
+            </div><br>
+        </ul>
+    </section>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            const items = document.querySelectorAll('.item');
+            items.forEach((item, index) => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                    item.style.transform = 'translateX(0)';
+                    item.style.opacity = '1';
+                } else {
+                    item.style.transform = 'translateX(-100px)';
+                    item.style.opacity = '0';
+                }
+            });
+        });
+    </script>
+    
+    <style>
+        .item {
+            transition: transform 1.5s ease, opacity 1.5s ease;
+            transform: translateX(-100px);
+            opacity: 0;
+        }
+    </style>
+    
+    <script>
+        function mostrarDescricao(descricao) {
+            const popup = document.createElement('div');
+            popup.style.position = 'fixed';
+            popup.style.left = '50%';
+            popup.style.top = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.padding = '20px';
+            popup.style.backgroundColor = 'black';
+            popup.style.color = 'white';
+            popup.style.borderRadius = '10px';
+            popup.style.border = '3px solid white';
+            popup.style.fontWeight = '600';
+            popup.style.zIndex = '1000';
+            popup.innerText = descricao;
+         
+            const fechar = document.createElement('button');
+            fechar.innerText = 'Fechar';
+            fechar.onclick = function () {
+                document.body.removeChild(popup);
+            };
+            
+            popup.appendChild(fechar);
+            document.body.appendChild(popup);
+        }
+    </script>
+
+    <!-- contador -->
+    <style>
+        #contador {
+            width: 3%;
+            position: fixed;
+            width: 25px;
+            height: 28px;
+            bottom: 240px;
+            right: 10px;
+            text-align: center;
+            font-size: 25px;
+            z-index: 1000;
+            background-color: rgb(255, 255, 255);
+            border-radius: 30px;
+            color: rgb(0, 0, 0);
+        }
+    </style>
+
+    <div id="contador">0</div>
+
+    <!-- carrinho -->
+
+    <section id="carrinho2" class="pagamento">
+        <marquee class="serviços" id="T" scrollamount="5" direction="right"><i class="sec">CARRINHO</i></marquee>
+        <div class="carrinho"><br>
+            <u><label for="endereco">DIGITE SEU NOME:</label></u><br><br>
+            <input size="30"
+                style="border-radius: 10px; text-align: center; font-weight: 600; font-size: 16px; padding: 5px;"
+                type="text" id="nome" name="nome" placeholder="Nome completo" required><br><br>
+            <u><label for="formaPagamento">FORMA DE PAGAMENTO:</label></u><br><br>
+            <select style="border-radius: 10px; text-align: center; font-size: 15px;padding: 5px" id="formaPagamento"
+                name="formaPagamento" required>
+                <option value="">-:-</option>
+                <option value="PIX">PIX</option>
+                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                <option value="Cartão de Débito">Cartão de Débito</option>
+                <option value="Dinheiro">Dinheiro</option>
+            </select><br><br>
+            <div id="parcelas" style="display: none; padding: 5px">
+                <u><label for="parcelasSelect">DIVIDIR EM:</label></u><br><br>
+                <select style="font-size: 12px; padding: 5px;" id="parcelasSelect">
+                    <option value="1">1x</option>
+                    <option value="2">2x</option>
+                    <option value="3">3x</option>
+                </select><br><br>
+            </div>
+            <u><label for="data">ESCOLHA UMA DATA E HORÁRIO:</label></u><br><br>
+            <input style="font-size: 17px;" type="date" id="data" required><br><br>
+
+            <select id="horario">
+                <option value="">--:--</option>
+                <option value="08:00">08:00</option>
+                <option value="08:30">08:30</option>
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="">Almoço</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00">18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+            </select><br><br>
+            <button id="agendar">Agende AQUI!</button><br>
+            <p id="status"></p>
+            <h3> <img style="width: 25px;" src="carrinho-de-compras.png" alt=""> Carrinho</h3>
+            <ul id="listaCarrinho"></ul>
+            <p style="color: red; font-size: 25px;">Total: R$<span id="total">0</span></p>
+            <button style="padding: 3px; border-radius: 7px;" onclick="limparCarrinho()">Limpar Carrinho</button><br>
+            <br>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+            <button id="enviar">Enviar para WhatsApp</button>
+        </div>
+        <h5>Obs: Depois que agendar, clique em enviar para WhatsApp.</h5>
+        <h6>Será cobrado uma taxa de 5% da maquininha em cada parcela do cartão de credito.
+            (A Lei nº 13.455, de 26 de junho de 2017, permite que o empresário repasse os custos da maquininha em vendas
+            pagas com cartão de débito e crédito.)
+        </h6>
+    </section>
+    <script>
+        document.getElementById('agendar').addEventListener('click', function () {
+            document.getElementById('enviar').style.opacity = 1;
+        });
+
+        document.getElementById('formaPagamento').addEventListener('change', function () {
+            const parcelasDiv = document.getElementById('parcelas');
+            if (this.value === 'Cartão de Crédito') {
+                parcelasDiv.style.display = 'block';
+            } else {
+                parcelasDiv.style.display = 'none';
+            }
+        });
+    </script>
+    <section id="sobre">
+        <marquee class="serviços" id="T" scrollamount="5" direction="right"><i class="sec">SOBRE</i></marquee>
+        <p>Não importa quão pesado foi o dia, ir ao salão de beleza é um descanso para a minha mente. <br>
+            Salão de beleza: um spa não somente para o seu corpo, mas também para a sua mente. <br>
+            Às vezes a gente nem precisa de filtro para a foto, precisamos apenas ir ao salão de beleza.
+        </p>
+    </section>
+
+    <footer>
+        <style>
+            .whatsapp-link {
+                position: fixed;
+                width: 40px;
+                height: 40px;
+                bottom: 40px;
+                right: 15px;
+                border-radius: 50px;
+                text-align: center;
+                font-size: 30px;
+                z-index: 1000;
+                cursor: pointer;
+            }
+
+            .car3 {
+                width: 3%;
+                position: fixed;
+                width: 40px;
+                height: 40px;
+                bottom: 120px;
+                right: 15px;
+                text-align: center;
+                font-size: 30px;
+                z-index: 1000;
+                background-color: rgb(165, 164, 164);
+                border-radius: 30%;
+            }
+
+            .car2 {
+                width: 3%;
+                position: fixed;
+                width: 40px;
+                height: 40px;
+                bottom: 200px;
+                right: 15px;
+                text-align: center;
+                font-size: 30px;
+                z-index: 1000;
+                background-color: rgb(165, 164, 164);
+                border-radius: 30%;
+            }
+        </style>
+        <a href="#topo"><img class="car3" src="img topo.png"></a>
+        <a onclick="atendimentoAutomatico()"> <img class="whatsapp-link" src="whatsapp.png" alt=""> </a>
+    </footer>
+
+    <script>
+        const horarioSelect = document.getElementById('horario');
+        const agendarButton = document.getElementById('agendar');
+        const statusText = document.getElementById('status');
+        const dataInput = document.getElementById('data');
+
+        let indisponivelHorarios = JSON.parse(localStorage.getItem('indisponivelHorarios')) || {};
+
+        function atualizarDisponibilidade() {
+            const agora = new Date().getTime();
+            for (const [horario, tempo] of Object.entries(indisponivelHorarios)) {
+                if (agora > tempo) {
+                    delete indisponivelHorarios[horario];
+                }
+            }
+            localStorage.setItem('indisponivelHorarios', JSON.stringify(indisponivelHorarios));
+            atualizarStatus();
+        }
+
+        function atualizarStatus() {
+            horarioSelect.querySelectorAll('option').forEach(option => {
+                if (indisponivelHorarios[option.value]) {
+                    option.classList.add('indisponivel');
+                    option.disabled = true;
+                } else {
+                    option.classList.remove('indisponivel');
+                    option.disabled = false;
+                }
+            });
+        }
+
+        agendarButton.addEventListener('click', () => {
+            const horarioEscolhido = horarioSelect.value;
+            const dataEscolhida = dataInput.value.split('-').reverse().join('/');
+            if (!indisponivelHorarios[horarioEscolhido]) {
+                indisponivelHorarios[horarioEscolhido] = new Date().getTime() + 600; // 1 minuto
+                localStorage.setItem('indisponivelHorarios', JSON.stringify(indisponivelHorarios));
+                statusText.textContent = `Horário ${horarioEscolhido} no dia ${dataEscolhida} agendado!`;
+                atualizarDisponibilidade();
+                Swal.fire('Agendado com sucesso!');
+            } else {
+                statusText.textContent = `Horário ${horarioEscolhido} já está indisponível!`;
+            }
+            setTimeout(function () {
+                location.reload();
+            }, 60000);
+        });
+
+        atualizarDisponibilidade();
+    </script>
+    <script>
+        const produtos = document.querySelectorAll('.produto');
+        const listaCarrinho = document.getElementById('listaCarrinho');
+        const totalElement = document.getElementById('total');
+        const enviarButton = document.getElementById('enviar');
+        let total = 0;
+
+        produtos.forEach(produto => {
+            produto.addEventListener('change', () => {
+                const valor = parseFloat(produto.value.split(' - R$')[1]);
+                if (produto.checked) {
+                    total += valor;
+                    const li = document.createElement('li');
+                    li.textContent = produto.value;
+                    listaCarrinho.appendChild(li);
+                    Swal.fire('Adicionado no carrinho!');
+                } else {
+                    total -= valor;
+                    const items = Array.from(listaCarrinho.children);
+                    items.forEach(item => {
+                        if (item.textContent === produto.value) {
+                            listaCarrinho.removeChild(item);
+                        }
+                    });
+                }
+                totalElement.textContent = total.toFixed(2);
+            });
+        });
+        enviarButton.addEventListener('click', () => {
+            const horario = document.getElementById('horario').value;
+            const data = document.getElementById('data').value.split('-').reverse().join('/');
+            const nome = document.getElementById('nome').value;
+            const formaPagamento = document.getElementById('formaPagamento').value;
+            const parcelas = document.getElementById('parcelasSelect').value;
+            const statusText = document.getElementById('status');
+            let valorTotal = total;
+
+            if (formaPagamento === 'Cartão de Crédito' && parcelas > 1) {
+                const taxa = 0.05; // 5%
+                valorTotal += (total * taxa * (parcelas - 1));
+            }
+
+            const mensagem = `        \nSALÃO MEGA STAR
+             \nInformações do Cliente: 
+                    \nNome: ${nome}  \nForma de Pagamento:  ${formaPagamento}  \nParcelas: ${parcelas}
+                    \nData marcada: ${data}  \nHorário marcado: ${horario}  
+                            
+    Serviços escolhidos: 
+                            
+             ${Array.from(listaCarrinho.children).map(item => item.textContent).join(', ')}.
+              _________________________________
+                        Total: R$${valorTotal.toFixed(2)}.
+             Salão Mega Star Agradeçe.`;
+
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=5599992183396&text=${encodeURIComponent(mensagem)}`;
+            window.open(whatsappUrl);
+        });
+        function enviarMensagem(mensagem) {
+            const numeroWhatsApp = "5599992183396";
+            const url = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensagem)}`;
+            window.open(url, '_blank');
+        }
+
+        function atendimentoAutomatico() {
+            const mensagens = [
+                "Olá! Como posso ajudar? Estou aqui para responder suas perguntas.",
+            ];
+            mensagens.forEach(mensagem => enviarMensagem(mensagem));
+        }
+
+    </script>
+
+    <script>
+        let contagem = 0;
+
+        function atualizarContador(checkbox) {
+            if (checkbox.checked) {
+                contagem++;
+            } else {
+                contagem--;
+            }
+            document.getElementById('contador').innerText = '' + contagem;
+        }
+        function limparCarrinho() {
+            const listaCarrinho = document.getElementById('listaCarrinho');
+            listaCarrinho.innerHTML = '';
+            total = 0;
+            document.getElementById('total').textContent = total.toFixed(2);
+            contagem = 0;
+            document.getElementById('contador').innerText = '' + contagem;
+            const produtos = document.querySelectorAll('.produto');
+            produtos.forEach(produto => {
+                produto.checked = false;
+            });
+        }
+        document.addEventListener('keydown', function (e) {
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+    <script>
+        let total2 = 0;
+        if (document.getElementById('gl').checked) total2 += 50;
+        if (document.getElementById('sod').checked) total2 += 20;
+        if (document.getElementById('hem').checked) total2 += 30;
+
+        document.getElementById('total2').innerText = "Total2: R$ " + total2.toFixed(2);
+        function mostDesc(botao) {
+            var descricao = botao.previousElementSibling;
+            if (descricao.style.display === "none") {
+                descricao.style.display = "block";
+                botao.textContent = "Fechar";
+            } else {
+                descricao.style.display = "none";
+                botao.textContent = "Descrição";
+            }
+        }
+    </script>
+    <script>
+        function alterarStatus() {
+            var status = document.getElementById("status");
+            var horaAtual = new Date().getHours();
+            if (horaAtual >= 19 && horaAtual < 25) {
+                status.innerHTML = "Aberto";
+                status.style.color = "green";
+            } else {
+                status.innerHTML = "Fechado";
+                status.style.color = "red";
+            }
+        }
+    </script>
+    <script>
+        document.getElementById('parcelasSelect').addEventListener('change', function () {
+            const parcelas = parseInt(this.value);
+            const formaPagamento = document.getElementById('formaPagamento').value;
+            let valorTotal = total;
+
+            if (formaPagamento === 'Cartão de Crédito' && parcelas > 1) {
+                const taxa = 0.05; // 5%
+                valorTotal += (total * taxa * (parcelas - 1));
+            }
+
+            totalElement.textContent = valorTotal.toFixed(2);
+        });
+    </script>
+
+
+
+    <a href="#carrinho2"><img class="car2" src="carrinho-de-compras.png"></a>
+    <section id="contato">
+        <marquee class="serviços" id="T" scrollamount="5" direction="right"><i class="sec">CONTATO</i></marquee>
+
+
+        <footer>
+            <style>
+                footer {
+                    background-color: #000000;
+                    color: #fff;
+                    text-align: center;
+                    padding: 10px 0;
+                    border-radius: 10px;
+                }
+
+                .rodape ul {
+                    list-style: none;
+                    padding: 0;
+                    font-size: 12px;
+                }
+
+                .rodape li {
+                    display: inline;
+                    margin: 0 10px;
+                }
+
+                .rodape a {
+                    color: #fff;
+                    text-decoration: none;
+                }
+
+                .rodape a:hover {
+                    text-decoration: underline;
+                }
+
+                .wha {
+                    width: 2%;
+                    box-shadow: 10px, 10px, 20px black -10px -10px 20px black;
+                }
+
+                .inst {
+                    width: 2%;
+                }
+
+                .car {
+                    width: 20%;
+                    margin-top: 3%;
+                }
+
+                b {
+                    font-size: 12px;
+                }
+            </style>
+            <!--rodape-->
+            <div class="rodape">
+                <ul>
+                    <h4> <img class="wha" src="whatsapp.png">(99) 99218-3396</h4>
+                    <li>
+                        <img id="C1" class="inst" src="instagram.png" alt=""><a style="font-size: 100%;"
+                            href="https://www.instagram.com/salao_mega_star_?igsh=MTBoajFhZnFvNnM5bg==">
+                            <b>Acesse aqui nosso Instagram</b></a>
+                        <a class="whatsapp-link" href="https://wa.me/5599992183396" target="_blank"><img
+                                class="whatsapp-link" src="whatsapp.png" alt=""></a>
+                    </li>
+                    <a href="#carrinho2"><img class="car2" src="carrinho-de-compras.png"></a>
+                    <a href="#topo"><img class="car3" src="img topo.png"></a>
+                </ul>
+                <!-- <li><b>Email:</b> itingadomaranhao@gmail.com</li><br><br> -->
+                <li><b>Endereço: rua Brasil, S\N, Jardim Planalto, Itinga do Maranhão.</b> <br>
+                    <br><b>Segunda a Sábado das 8:00 as 11:00 <br> e das 13:00 as 19:00
+                        <br><br>Formas de pagamentos:</b>
+                </li><br>
+
+                <img class="car" src="cartao.webp" alt=""><br><br>
+                <a href="https://wa.me/5599992183396" target="_blank">
+                    <li><i><u><b>Site criado por: Carlos de Freitas Rocha.</b> <br>Click aqui e faça seu
+                                orçamento.</u></i></li>
+                </a>
+                <b>
+                    <p><a href="https://wa.me/5599992183396" target="_blank"><img src="logo2.png"
+                                style="width: 50px; border-radius: 10px;"></a></p>
+                </b>
+            </div>
+        </footer>
+    </section>
+</body>
+
+</html>
+<!-- horario no agendar = \nHorário marcado: ${horario} -->
